@@ -5,7 +5,12 @@ const process = require('process');
 
 const {stdin, stdout}=process;
 
-fs.readFile(path.join(__dirname, 'text.txt'), 'utf-8', (error, data)=>{
-    if(error) throw error;
-    stdout.write(data);
-})
+async function logChunks(readable) {
+    for await (const chunk of readable) {
+        stdout.write(chunk);
+    }
+  }
+  
+  const readable = fs.createReadStream(
+    path.join(__dirname, 'text.txt'), {encoding: 'utf8'});
+  logChunks(readable);
