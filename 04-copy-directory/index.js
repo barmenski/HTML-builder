@@ -6,7 +6,7 @@ const { constants } = require('fs');
 (async () => {
   try {
     await fs.access(path.join(__dirname, 'files-copy'), constants.F_OK);
-    await fs.rmdir(path.join(__dirname, 'files-copy'), {
+    await fs.rm(path.join(__dirname, 'files-copy'), {
       recursive: true,
       force: true,
     });
